@@ -1,3 +1,4 @@
+//Importing from Express to make the app, and using Body-Parser middleware.
 import express from "express";
 import bodyParser from "body-parser";
 
