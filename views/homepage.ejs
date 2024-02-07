@@ -1,0 +1,77 @@
+<%- include("partials/header.ejs") %>
+
+<form action="/post" method="POST" class="mx-auto mt-5" style="width: 450px">
+  <% if(locals.username){ %>
+  <h1>Welcome <%= username %>!</h1>
+  <% } else { %>
+  <h1>Welcome Guest!</h1>
+  <% } %> 
+
+  <div class="row d-flex justify-content-center mt-3">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-0 border" style="background-color: #f0f2f5">
+        <div class="card-body p-4">
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="addANote"
+              name="messages"
+              class="form-control"
+              placeholder="Type comment..."
+            />
+            <label class="form-label" for="addANote">+ Add a comment!</label>
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-body">
+              <p>Type your comment, and hit enter to add it</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<% if(locals.username && locals.messages){ %>
+  
+  <% for(let i = 0; i < messages.length; i++) {%>
+
+    <div class="card d-flex flex-row comment-row mt-5 cards" style="width: 450px;"> 
+      <div class="card-body comment-text active w-100"> 
+            <h6 class="font-medium">  </h6> 
+            <span id="message" class="m-b-15 d-block"> <%= messages[i] %> </span>
+          <div class="comment-footer mt-1"> <%= username %> <span class="text-muted float-right"><%= new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) %></span> 
+            <button onclick="editButton(this)" type="button" class="btn btn-cyan btn-sm btn-primary">Edit</button>
+            <button onclick="deleteButton(this)" type="button" class="btn btn-danger btn-sm" >Delete</button>      
+          </div>
+    </div>
+    </div> 
+  
+  <% } %>
+
+<% } %>
+
+<script>
+  
+  console.log("Working Script.");
+
+  function deleteButton(ele){
+    ele.closest(".card").remove(); 
+  }
+
+  function editButton(ele){
+    console.log("The edit button has been clicked.");
+
+    let newMessage = prompt("What is the new message?");
+
+    ele.closest(".card-body").querySelector("span").innerHTML = newMessage;
+
+    console.log("The message has been changed!");
+    
+  }
+  
+  
+</script>
+
+

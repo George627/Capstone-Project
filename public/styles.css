@@ -1,0 +1,17 @@
+html{
+    min-height: 100%;
+}
+
+body {
+    background: linear-gradient(to bottom, black 0, rgb(2, 2, 175), rgb(99, 1, 99) 100%);
+    color: aliceblue;
+    height: 100%;
+}
+
+form.mt-5{
+    width: 50%;
+    margin: 0 auto
+}
+
+
+
