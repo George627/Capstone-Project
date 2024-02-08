@@ -1,0 +1,32 @@
+<%- include("partials/header.ejs") %>
+
+    <form action="/history" method="post">
+
+    <% if(locals.username && locals.messages){ %>
+        <br>
+        
+        <h1>History</h1>
+
+        <br>
+
+        <% for(let i = 0; i < messages.length; i++) {%>
+      
+          <div id="messageH" class="card d-flex flex-row comment-row mt-5 cards" style="width: 450px;"> 
+            <div class="card-body comment-text active w-100"> 
+                  <h6 class="font-medium">  </h6> 
+                  <span id="message" class="m-b-15 d-block"> <%= messages[i] %> </span>
+                <div class="comment-footer mt-1"> <%= username %> <span class="text-muted float-right"><%= new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) %></span> 
+                  <button type="submit" class="btn btn-cyan btn-sm btn-primary" name="edit" value="<%= messages[i] %>">Edit</button>
+                  <button type="submit" class="btn btn-danger btn-sm" name="delete" value="<%= messages[i] %>">Delete</button>     
+                </div>
+          </div>
+          </div> 
+        
+        <% } %>
+      
+    <% } else { %>
+        <h1>Nothing Happened!!!</h1>
+    <% } %>
+      
+    </form>
+
