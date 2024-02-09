@@ -1,5 +1,7 @@
 <%- include("partials/header.ejs") %>
 
+    <div class="mb-5 py-4 mx-auto" style="width: 450px">
+
     <form action="/history" method="post">
 
     <% if(locals.username && locals.messages){ %>
@@ -25,8 +27,13 @@
         <% } %>
       
     <% } else { %>
-        <h1>Nothing Happened!!!</h1>
+
+        <br>
+
+        <h1>No History</h1>
     <% } %>
       
     </form>
-
+    
+    </div>
+<%- include("partials/footer.ejs") %>

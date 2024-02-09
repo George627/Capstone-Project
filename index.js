@@ -46,8 +46,6 @@ app.post("/homepage", (req, res) => {
     //Creating the m variable to handle the messages that the user sends.
     let m = req.body["messages"];
 
-    console.log(m);
-
     //Push the new message into the mhistory Array.
     mhistory.push(m);
 
@@ -60,9 +58,9 @@ app.post("/homepage", (req, res) => {
 
 app.post("/history", (req, res) => {
     
-    var newMessage = "";
-
     if(req.body["edit"]){
+
+        var newMessage = "";
         
         newMessage = readline.question("What is the new message?");
         
@@ -76,18 +74,12 @@ app.post("/history", (req, res) => {
         
         console.log("The message has been changed!");
     }
+    
     else if (req.body["delete"]){
         
         mhistory = mhistory.filter(item => item !== req.body["delete"]);
     }
-    else{
-        console.log(newMessage);
-        console.log(req.body);
-    }
     
-    
-    
-
     //Renders the homepage.ejs, along with the user's username and message history.
     res.render("history.ejs", {
         username: name,

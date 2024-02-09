@@ -1,6 +1,7 @@
 <%- include("partials/header.ejs") %>
 
-<form action="/signin" method="POST"class="mx-auto mt-5 main" style="width: 450px;">
+<div class="format">
+<form action="/signin" method="POST"class="mx-auto mt-5" style="width: 450px;">
   <h1 class="h3 mb-3 fw-normal">Please enter your username:</h1>
 
   <div class="form-floating">
@@ -9,5 +10,7 @@
   </div>
 
   <button class="btn btn-primary w-100 py-2 mt-3" type="submit">Sign in</button>
-  <p class="mt-5 mb-3 text-body-secondary" data-bs-theme="dark">© <%= new Date().getFullYear() %> </p>
 </form>
+</div>
+
+<%- include("partials/footer.ejs") %>

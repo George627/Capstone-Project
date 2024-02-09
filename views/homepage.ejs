@@ -1,5 +1,6 @@
 <%- include("partials/header.ejs") %>
 
+<div class="format">
 <form action="/homepage" method="post" class="mx-auto mt-5" style="width: 450px">
   <% if(locals.username){ %>
   <h1>Welcome <%= username %>!</h1>
@@ -31,6 +32,6 @@
     </div>
   </div>
 </form>
-
-
+</div>
+<%- include("partials/footer.ejs") %>
 

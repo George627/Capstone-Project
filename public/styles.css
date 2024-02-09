@@ -8,10 +8,23 @@ body {
     height: 100%;
 }
 
+footer { 
+    position:fixed;
+    padding: 1em;
+    bottom:0;
+    left:0; 
+    width: 100%;
+}
+
 form.mt-5{
     width: 50%;
     margin: 0 auto
 }
+
+.format{
+    margin-top: 130px;
+}
+
 
 
 
