@@ -1,16 +1,20 @@
 <%- include("partials/header.ejs") %>
 
     <div class="mb-5 py-4 mx-auto" style="width: 450px">
-
+    
+    <%# A form that submits on button press between the Edit & Delete button. %>
     <form action="/history" method="post">
-
-    <% if(locals.username && locals.messages){ %>
+    
+    <%# If there is a username and messages, and if there is history... %>    
+    <% if((locals.username && locals.messages) && locals.history === true){ %>
         <br>
         
-        <h1>History</h1>
+        <h1 class="text-center">History</h1>
 
         <br>
 
+        <%# Display all comments in messages with card elements.
+            Username, messages, and history are labeled in index.js %>
         <% for(let i = 0; i < messages.length; i++) {%>
       
           <div id="messageH" class="card d-flex flex-row comment-row mt-5 cards" style="width: 450px;"> 
@@ -25,15 +29,17 @@
           </div> 
         
         <% } %>
-      
+    
+        <%# Else, there is no history. %>
     <% } else { %>
 
         <br>
 
-        <h1>No History</h1>
+        <h1 class="text-center">No History</h1>
     <% } %>
       
     </form>
     
     </div>
+
 <%- include("partials/footer.ejs") %>

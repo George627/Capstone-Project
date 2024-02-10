@@ -4,7 +4,6 @@ import bodyParser from "body-parser";
 import readline from "readline-sync";
 
 
-
 //Using the app variable to use express.
 const app = express();
 
@@ -12,9 +11,11 @@ const app = express();
 const port = 3000;
 
 
-//Variables that will be used for the user's username and stores their messages in EJS. 
+/*Variables that will be used for the user's username and stores their messages in EJS. 
+isHistory handles whether or not if there are comments in mhistory.*/
 let name = "";
 let mhistory = [];
+let isHistory = false;
 
 //Connects the public folder to use images located there.
 app.use(express.static("public"));
@@ -39,8 +40,8 @@ app.post("/signin", (req, res) => {
     });
 });
 
-//A Post request that gets the message from the user. Then render the homepage.ejs.
-//Once received, the message is added to the mhistory array to store user's messages.
+/*A Post request that gets the message from the user. Then render the homepage.ejs.
+Once received, the message is added to the mhistory array to store user's messages.*/
 app.post("/homepage", (req, res) => {
 
     //Creating the m variable to handle the messages that the user sends.
@@ -49,6 +50,9 @@ app.post("/homepage", (req, res) => {
     //Push the new message into the mhistory Array.
     mhistory.push(m);
 
+    //isHistory changes the HTML to show history.
+    isHistory = true;
+
     //Renders the homepage.ejs, along with the user's username and message history.
     res.render("homepage.ejs", {
         username: name,
@@ -56,34 +60,51 @@ app.post("/homepage", (req, res) => {
     });
 })
 
+/*A Post request that handles if the Edit or Delete buttons 
+are pressed in history.ejs.*/
 app.post("/history", (req, res) => {
     
+    //If the edit button is pressed... 
     if(req.body["edit"]){
 
-        var newMessage = "";
+        //New variable to store new message.
+        var newComment = "";
         
-        newMessage = readline.question("What is the new message?");
+        //Prompt that ask the user for the new comment in the terminal.
+        newComment = readline.question("What is the new comment?");
         
+        //For loop that finds the old message in the mhistory array.
         for (let i = 0; i < mhistory.length; i++) {
 
+            //Once found, replace the old message spot with the new one in the array.
             if(req.body["edit"] === mhistory[i]){
-                mhistory[i] = newMessage;
+                mhistory[i] = newComment;
             }
             
         }
         
+        //Message confirming the comment change
         console.log("The message has been changed!");
     }
     
+    //If the delete button is pressed... 
     else if (req.body["delete"]){
         
+        //Find the comment in mhistory, then delete it.
         mhistory = mhistory.filter(item => item !== req.body["delete"]);
+
+        //If there is no comments in mhistory, change isHistory to false
+        //to represent no history.
+        if(mhistory.length === 0){
+            isHistory = false;
+        }
     }
     
     //Renders the homepage.ejs, along with the user's username and message history.
     res.render("history.ejs", {
         username: name,
-        messages: mhistory
+        messages: mhistory,
+        history: isHistory
     });
 })
 
@@ -98,7 +119,8 @@ app.get("/homepage", (req, res) => {
 app.get("/history", (req, res) => {
     res.render("history.ejs", {
         username: name,
-        messages: mhistory
+        messages: mhistory,
+        history: isHistory
     });
 }); 
 

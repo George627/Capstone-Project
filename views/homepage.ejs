@@ -1,13 +1,21 @@
 <%- include("partials/header.ejs") %>
 
+<%# A div that formats the form on the webpage. %>
 <div class="format">
-<form action="/homepage" method="post" class="mx-auto mt-5" style="width: 450px">
-  <% if(locals.username){ %>
-  <h1>Welcome <%= username %>!</h1>
-  <% } else { %>
-  <h1>Welcome Guest!</h1>
-  <% } %> 
 
+<%# A form that submits the user's comment. %>
+<form action="/homepage" method="post" class="mx-auto mt-5" style="width: 450px">
+  
+  <%# If there is a username, welcome the user by their name. %>
+  <% if(locals.username){ %>
+  <h1 class="text-center">Welcome <%= username %>!</h1>
+
+  <%# Else, they are referred to as Guest. %>
+  <% } else { %>
+  <h1 class="text-center">Welcome Guest!</h1>
+  <% } %> 
+  
+  <%# Card that is used for the user's comment. %>
   <div class="row d-flex justify-content-center mt-3">
     <div class="col-md-8 col-lg-6">
       <div class="card shadow-0 border" style="background-color: #f0f2f5">
